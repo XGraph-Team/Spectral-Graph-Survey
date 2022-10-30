@@ -3,11 +3,11 @@ import os.path as osp
 
 import torch
 import torch.nn.functional as F
-from torch_geometric.nn import SplineConv, GCNConv
-from torch_geometric.datasets import TUDataset, Planetoid, Coauthor, Amazon
-from torch_geometric.loader import DataLoader
+from torch_geometric.datasets import Planetoid, Coauthor, Amazon, WikipediaNetwork, Actor, WebKB
+from sklearn.model_selection import train_test_split
 from torch_geometric.logging import init_wandb, log
-from torch_geometric.nn import MLP, GINConv, global_add_pool
+
+from models import GCN
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--dataset', type=str, default='MUTAG')
@@ -21,21 +21,25 @@ args = parser.parse_args()
 
 
 
-
-
 if __name__ == '__main__':
-
-
-
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
     # 7 homo: cora/cite-seer/pubmed/amazon computer, photos/coauthor CS, physics/
+    # 6 heter: wiki chameleon/squirrel/actor co-occur/wisconsin/texas/cornell
+
     dataset_data = {
-        # 'cora': Planetoid(root='/tmp/Cora', name='Cora'),
-        # 'pubmed': Planetoid(root='/tmp/Cora', name='PubMed'),
-        # 'citeseer': Planetoid(root='/tmp/Citeseer', name='Citeseer'),
+        'cora': Planetoid(root='/tmp/Cora', name='Cora'),
+        'pubmed': Planetoid(root='/tmp/Cora', name='PubMed'),
+        'citeseer': Planetoid(root='/tmp/Citeseer', name='Citeseer'),
         'cs': Coauthor(root='/tmp/CS', name='CS'),
-        # 'physics': Coauthor(root='/tmp/physics', name='physics'),
-        # 'computers': Amazon(root='/tmp/Computers', name='Computers')
+        'physics': Coauthor(root='/tmp/physics', name='physics'),
+        'computers': Amazon(root='/tmp/Computers', name='Computers'),
+        'chameleon': WikipediaNetwork(root='/tmp/chameleon', name='chameleon'),
+        'squirrel': WikipediaNetwork(root='/tmp/squirrel', name='squirrel'),
+        'actor': Actor(root='/tmp/actor'),
+        'Cornell': WebKB(root='/tmp/Cornell', name='Cornell'),
+        'Texas': WebKB(root='/tmp/Texas', name='Texas'),
+        'Wisconsin': WebKB(root='/tmp/Texas', name='Wisconsin')
     }
 
     for data_name, data_content in dataset_data.items():
@@ -45,32 +49,19 @@ if __name__ == '__main__':
         data = dataset[0]
 
         # train / test split
+        data_num = data.num_nodes
+        train_idx, test_idx = train_test_split(list(range(data_num)), test_size=0.20, random_state=42)
+        train_idx, val_idx = train_test_split(train_idx, test_size=0.12, random_state=1)  # 0.25 x 0.8 = 0.2
+
         data.train_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
-        data.train_mask[:data.num_nodes - 1000] = 1
-
+        data.train_mask[train_idx] = 1
         data.test_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
-        data.test_mask[data.num_nodes - 500:] = 1
-
+        data.test_mask[test_idx] = 1
         data.val_mask = torch.zeros(data.num_nodes, dtype=torch.bool)
-        data.val_mask[data.num_nodes - 1000:data.num_nodes - 500] = 1
+        data.val_mask[val_idx] = 1
 
-
-        class Net(torch.nn.Module):
-            def __init__(self, in_channels, hidden_channels, out_channels):
-                super().__init__()
-                self.conv1 = GCNConv(in_channels, hidden_channels, cached=True)
-                self.conv2 = GCNConv(hidden_channels, out_channels, cached=True)
-
-            def forward(self, x, edge_index, edge_weight=None):
-                x = F.dropout(x, p=0.5, training=self.training)
-                x = self.conv1(x, edge_index, edge_weight).relu()
-                x = F.dropout(x, p=0.5, training=self.training)
-                x = self.conv2(x, edge_index, edge_weight)
-                return x
-
-
-        device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        model = Net(dataset.num_features, args.hidden_channels, dataset.num_classes)
+        # setup model
+        model = GCN(dataset.num_features, args.hidden_channels, dataset.num_classes)
         model, data = model.to(device), data.to(device)
         optimizer = torch.optim.Adam(model.parameters(), lr=0.005, weight_decay=5e-3)
 
@@ -112,4 +103,6 @@ if __name__ == '__main__':
             if val_acc > best_val_acc:
                 best_val_acc = val_acc
                 test_acc = tmp_test_acc
-            log(Epoch=epoch, Loss=loss, Train=train_acc, Val=val_acc, Test=test_acc)
+            # if epoch % 10 == 0:
+            #     log(Data=data_name, Epoch=epoch, Loss=loss, Train=train_acc, Val=val_acc, Test=test_acc)
+        log(Data=data_name, Test=test_acc)
