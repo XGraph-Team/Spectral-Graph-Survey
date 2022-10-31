@@ -78,7 +78,7 @@ class GAT2(torch.nn.Module):
 
 
 class GIN(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, num_layers):
+    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=5):
         super().__init__()
 
         self.convs = torch.nn.ModuleList()
