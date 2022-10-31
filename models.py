@@ -146,4 +146,4 @@ class GCN2(torch.nn.Module):
         # x = self.conv2(x, edge_index, edge_weight)
         return x
 
-__all__ = ['GCN', 'Sage', 'ARMA', 'GCN2', 'APPNA','SGC', 'GIN', 'ChebNet']
+__all__ = ['GCN', 'Sage', 'ARMA', 'APPNA','SGC', 'GIN', 'ChebNet']
