@@ -1,6 +1,6 @@
 import torch
 from torch_geometric.graphgym import GATConv
-from torch_geometric.nn import GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv
+from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, global_add_pool
 import torch.nn.functional as F
 
 
@@ -78,17 +78,23 @@ class GAT2(torch.nn.Module):
 
 
 class GIN(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels):
+    def __init__(self, in_channels, hidden_channels, out_channels, num_layers):
         super().__init__()
-        self.conv1 = GINConv(in_channels, hidden_channels)
-        self.conv2 = GINConv(hidden_channels, out_channels)
 
-    def forward(self, x, edge_index, edge_weight=None):
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.conv1(x, edge_index, edge_weight).relu()
-        # x = F.dropout(x, p=0.5, training=self.training)
-        # x = self.conv2(x, edge_index, edge_weight)
-        return x
+        self.convs = torch.nn.ModuleList()
+        for _ in range(num_layers):
+            mlp = MLP([in_channels, hidden_channels, hidden_channels])
+            self.convs.append(GINConv(nn=mlp, train_eps=False))
+            in_channels = hidden_channels
+
+        self.mlp = MLP([hidden_channels, hidden_channels, out_channels],
+                       norm=None, dropout=0.5)
+
+    def forward(self, x, edge_index, batch):
+        for conv in self.convs:
+            x = conv(x, edge_index).relu()
+        x = global_add_pool(x, batch)
+        return self.mlp(x)
 
 
 class SGC(torch.nn.Module):
