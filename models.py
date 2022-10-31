@@ -94,15 +94,14 @@ class GIN(torch.nn.Module):
 class SGC(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
-        self.conv1 = SGConv(in_channels, hidden_channels)
-        self.conv2 = SGConv(hidden_channels, out_channels)
+        self.conv1 = SGConv(in_channels, out_channels, K=2,
+                            cached=True)
 
     def forward(self, x, edge_index, edge_weight=None):
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.conv1(x, edge_index, edge_weight).relu()
-        # x = F.dropout(x, p=0.5, training=self.training)
-        # x = self.conv2(x, edge_index, edge_weight)
-        return x
+        x, edge_index = x, edge_index
+        x = self.conv1(x, edge_index)
+        return F.log_softmax(x, dim=1)
+
 
 
 class ARMA(torch.nn.Module):
