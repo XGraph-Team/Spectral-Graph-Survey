@@ -1,4 +1,5 @@
 import torch
+from torch.nn import Linear
 from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, \
     global_add_pool, GATConv
 import torch.nn.functional as F
@@ -19,10 +20,10 @@ class GCN(torch.nn.Module):
 
 
 class ChebNet(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels):
+    def __init__(self, in_channels, hidden_channels, out_channels, K=5):
         super().__init__()
-        self.conv1 = ChebConv(in_channels, hidden_channels)
-        self.conv2 = ChebConv(hidden_channels, out_channels)
+        self.conv1 = ChebConv(in_channels, out_channels, K)
+        # self.conv2 = ChebConv(hidden_channels, out_channels)
 
     def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.5, training=self.training)
@@ -138,23 +139,41 @@ class APPNA(torch.nn.Module):
 
 
 class GCN2(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels):
+    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=1, alpha=0.1, theta=0.5,
+                 shared_weights=True, dropout=0.0):
         super().__init__()
-        self.conv1 = GCN2Conv(in_channels, hidden_channels)
-        self.conv2 = GCN2Conv(hidden_channels, out_channels)
+
+        self.lins = torch.nn.ModuleList()
+        self.lins.append(Linear(in_channels, hidden_channels))
+        self.lins.append(Linear(hidden_channels, out_channels))
+
+        self.convs = torch.nn.ModuleList()
+        for layer in range(num_layers):
+            self.convs.append(
+                GCN2Conv(hidden_channels, alpha, theta, layer + 1,
+                         shared_weights, normalize=False))
+
+        self.dropout = dropout
 
     def forward(self, x, edge_index, edge_weight=None):
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.conv1(x, edge_index, edge_weight).relu()
-        # x = F.dropout(x, p=0.5, training=self.training)
-        # x = self.conv2(x, edge_index, edge_weight)
-        return x
+        x = F.dropout(x, self.dropout, training=self.training)
+        x = x_0 = self.lins[0](x).relu()
+
+        for conv in self.convs:
+            x = F.dropout(x, self.dropout, training=self.training)
+            x = conv(x, x_0, edge_index)
+            x = x.relu()
+
+        x = F.dropout(x, self.dropout, training=self.training)
+        x = self.lins[1](x)
+
+        return x.log_softmax(dim=-1)
 
 
 # complete
-# 'GCN', 'Sage', 'ARMA', 'APPNA', 'GAT'
+# 'GCN', 'GCN2', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC',
 
-__all__ = ['GIN', 'GCN2', 'SGC', 'ChebNet']
+__all__ = ['ChebNet']
 
 # to do
 # GraphConv
