@@ -4,6 +4,7 @@ import torch
 import torch.nn.functional as F
 from torch_geometric.nn import GCNConv
 
+
 class GCN(torch.nn.Module):
     def __init__(self):
         super().__init__()
@@ -44,7 +45,6 @@ if __name__ == '__main__':
     # dataset = WebKB(root='/tmp/Texas', name='Texas')
     # dataset = WebKB(root='/tmp/Texas', name='Wisconsin')
 
-
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     model = GCN().to(device)
     data = dataset[0].to(device)
@@ -54,12 +54,10 @@ if __name__ == '__main__':
     for epoch in range(200):
         optimizer.zero_grad()
         out = model(data)
-        # not every dataset has train mast, implement yourself
         loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])
         loss.backward()
         optimizer.step()
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
     model.eval()
     pred = model(data).argmax(dim=1)
     correct = (pred[data.test_mask] == data.y[data.test_mask]).sum()

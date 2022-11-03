@@ -1,6 +1,6 @@
 import torch
-from torch_geometric.graphgym import GATConv
-from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, global_add_pool
+from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, \
+    global_add_pool, GATConv
 import torch.nn.functional as F
 
 
@@ -49,11 +49,12 @@ class Sage(torch.nn.Module):
 class GAT(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, heads=8):
         super().__init__()
-        self.conv1 = GATConv(in_channels, hidden_channels, heads, dropout=0.6)
+        self.conv1 = GATConv(in_channels, out_channels, heads, dropout=0.6)
         # On the Pubmed dataset, use `heads` output heads in `conv2`.
-        self.conv2 = GATConv(hidden_channels * heads, out_channels, heads=1, concat=False, dropout=0.6)
+        # self.conv2 = GATConv(hidden_channels * heads, out_channels, heads=1,
+        #                      concat=False, dropout=0.6)
 
-    def forward(self, x, edge_index):
+    def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.6, training=self.training)
         x = F.elu(self.conv1(x, edge_index))
         # x = F.dropout(x, p=0.6, training=self.training)
@@ -64,11 +65,11 @@ class GAT(torch.nn.Module):
 class GAT2(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, heads=8):
         super().__init__()
-        self.conv1 = GATv2Conv(in_channels, hidden_channels, heads, dropout=0.6)
+        self.conv1 = GATv2Conv(in_channels, out_channels, heads, dropout=0.6)
         # On the Pubmed dataset, use `heads` output heads in `conv2`.
-        self.conv2 = GATv2Conv(hidden_channels * heads, out_channels, heads=1, concat=False, dropout=0.6)
+        # self.conv2 = GATv2Conv(hidden_channels * heads, out_channels, heads=1, concat=False, dropout=0.6)
 
-    def forward(self, x, edge_index):
+    def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.6, training=self.training)
         x = F.elu(self.conv1(x, edge_index))
         # x = F.dropout(x, p=0.6, training=self.training)
@@ -76,9 +77,8 @@ class GAT2(torch.nn.Module):
         return x
 
 
-
 class GIN(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=5):
+    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=1):
         super().__init__()
 
         self.convs = torch.nn.ModuleList()
@@ -90,10 +90,10 @@ class GIN(torch.nn.Module):
         self.mlp = MLP([hidden_channels, hidden_channels, out_channels],
                        norm=None, dropout=0.5)
 
-    def forward(self, x, edge_index, batch):
+    def forward(self, x, edge_index, batch=None):
         for conv in self.convs:
             x = conv(x, edge_index).relu()
-        x = global_add_pool(x, batch)
+        # x = global_add_pool(x, batch)
         return self.mlp(x)
 
 
@@ -107,7 +107,6 @@ class SGC(torch.nn.Module):
         x, edge_index = x, edge_index
         x = self.conv1(x, edge_index)
         return F.log_softmax(x, dim=1)
-
 
 
 class ARMA(torch.nn.Module):
@@ -151,5 +150,11 @@ class GCN2(torch.nn.Module):
         # x = self.conv2(x, edge_index, edge_weight)
         return x
 
-# 'GCN', 'Sage', 'ARMA', 'APPNA',
-__all__ = ['SGC', 'GIN', 'ChebNet']
+
+# complete
+# 'GCN', 'Sage', 'ARMA', 'APPNA', 'GAT'
+
+__all__ = ['GIN', 'GCN2', 'SGC', 'ChebNet']
+
+# to do
+# GraphConv
