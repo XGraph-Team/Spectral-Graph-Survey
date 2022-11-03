@@ -115,5 +115,5 @@ if __name__ == '__main__':
                     # if epoch % 10 == 0:
                     #     log(Data=data_name, Epoch=epoch, Loss=loss, Train=train_acc, Val=val_acc, Test=test_acc)
                 except Exception as e:
-                    print(e)
+                    print('error')
             log(Data=data_name, Test=final_test_acc)
