@@ -32,7 +32,7 @@ class HCG(torch.nn.Module):
         return x
 
 class ChebNet(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, K=5):
+    def __init__(self, in_channels, hidden_channels, out_channels, K=3):
         super().__init__()
         self.conv1 = ChebConv(in_channels, out_channels, K)
         # self.conv2 = ChebConv(hidden_channels, out_channels)
