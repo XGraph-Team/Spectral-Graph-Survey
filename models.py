@@ -183,7 +183,7 @@ class GCN2(torch.nn.Module):
 
 
 # complete
-# 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC',
+#
 
-__all__ = ['HCG']
+__all__ = [ 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC','HCG']
 
