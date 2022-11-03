@@ -1,7 +1,7 @@
 import torch
 from torch.nn import Linear
 from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, \
-    global_add_pool, GATConv
+    global_add_pool, GATConv, GraphConv
 import torch.nn.functional as F
 
 
@@ -18,6 +18,18 @@ class GCN(torch.nn.Module):
         # x = self.conv2(x, edge_index, edge_weight)
         return x
 
+class HCG(torch.nn.Module):
+    def __init__(self, in_channels, hidden_channels, out_channels):
+        super().__init__()
+        self.conv1 = GraphConv(in_channels, out_channels)
+        # self.conv2 = GraphConv(hidden_channels, out_channels)
+
+    def forward(self, x, edge_index, edge_weight=None):
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.conv1(x, edge_index, edge_weight).relu()
+        # x = F.dropout(x, p=0.5, training=self.training)
+        # x = self.conv2(x, edge_index, edge_weight)
+        return x
 
 class ChebNet(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, K=5):
@@ -171,9 +183,7 @@ class GCN2(torch.nn.Module):
 
 
 # complete
-# 'GCN', 'GCN2', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC',
+# 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC',
 
-__all__ = ['ChebNet']
+__all__ = ['HCG']
 
-# to do
-# GraphConv
