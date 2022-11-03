@@ -1,7 +1,7 @@
 import torch
 from torch.nn import Linear
 from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, \
-    global_add_pool, GATConv, GraphConv
+    global_add_pool, GATConv, GraphConv, APPNP
 import torch.nn.functional as F
 
 
@@ -18,6 +18,7 @@ class GCN(torch.nn.Module):
         # x = self.conv2(x, edge_index, edge_weight)
         return x
 
+
 class HCG(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
@@ -30,6 +31,7 @@ class HCG(torch.nn.Module):
         # x = F.dropout(x, p=0.5, training=self.training)
         # x = self.conv2(x, edge_index, edge_weight)
         return x
+
 
 class ChebNet(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, K=3):
@@ -136,18 +138,24 @@ class ARMA(torch.nn.Module):
         return x
 
 
-class APPNA(torch.nn.Module):
+class GAPP(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
-        self.conv1 = APPNA(in_channels, hidden_channels)
-        self.conv2 = APPNA(hidden_channels, out_channels)
+        self.lin1 = Linear(in_channels, hidden_channels)
+        self.lin2 = Linear(hidden_channels, out_channels)
+        self.prop1 = APPNP(5, 0.1)
+
+    def reset_parameters(self):
+        self.lin1.reset_parameters()
+        self.lin2.reset_parameters()
 
     def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.5, training=self.training)
-        x = self.conv1(x, edge_index, edge_weight).relu()
-        # x = F.dropout(x, p=0.5, training=self.training)
-        # x = self.conv2(x, edge_index, edge_weight)
-        return x
+        x = F.relu(self.lin1(x))
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.lin2(x)
+        x = self.prop1(x, edge_index)
+        return F.log_softmax(x, dim=1)
 
 
 class GCN2(torch.nn.Module):
@@ -185,5 +193,5 @@ class GCN2(torch.nn.Module):
 # complete
 #
 
-__all__ = [ 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC','HCG']
-
+# __all__ = [ 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC','HCG']
+__all__ = ['GAPP']
