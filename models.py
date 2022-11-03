@@ -193,5 +193,5 @@ class GCN2(torch.nn.Module):
 # complete
 #
 
-# __all__ = [ 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'APPNA', 'GAT', 'GIN','SGC','HCG']
-__all__ = ['GAPP']
+__all__ = [ 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'GAPP', 'GAT', 'GIN','SGC','HCG']
+# __all__ = ['GAPP']
