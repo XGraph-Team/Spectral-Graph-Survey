@@ -191,7 +191,7 @@ class GCN2(torch.nn.Module):
 
 
 # complete
-#
-
-__all__ = [ 'GCN', 'GCN2', 'ChebNet', 'Sage', 'ARMA', 'GAPP', 'GAT', 'GIN','SGC','HCG']
-# __all__ = ['GAPP']
+# Linear: GCN, Sage, GIN, GAT?
+# Poly: ChebNet, SGC, HCG?, GCN2?
+# Rat: ARMA, GAPP
+__all__ = ['GCN', 'Sage', 'GIN', 'GAT', 'ChebNet', 'SGC', 'HCG', 'GCN2', 'GAPP', 'ARMA']
