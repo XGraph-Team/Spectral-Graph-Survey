@@ -6,16 +6,26 @@ import torch.nn.functional as F
 
 
 class GCN(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels):
+    def __init__(self, in_channels, hidden_channels, out_channels, layer_num):
         super().__init__()
         self.conv1 = GCNConv(in_channels, out_channels)
-        # self.conv2 = GCNConv(hidden_channels, out_channels)
+
+        self.convs = torch.nn.ModuleList()
+        for _ in range(layer_num - 2):
+            self.convs.append(GCNConv(hidden_channels, hidden_channels))
+
+        self.conv2 = GCNConv(hidden_channels, out_channels)
 
     def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.conv1(x, edge_index, edge_weight).relu()
-        # x = F.dropout(x, p=0.5, training=self.training)
-        # x = self.conv2(x, edge_index, edge_weight)
+
+        for conv in self.convs:
+            x = conv(x, edge_index).relu()
+
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.conv2(x, edge_index, edge_weight)
+
         return x
 
 
@@ -34,11 +44,11 @@ class Sage(torch.nn.Module):
 
 
 class GIN(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=1):
+    def __init__(self, in_channels, hidden_channels, out_channels, layers_num):
         super().__init__()
 
         self.convs = torch.nn.ModuleList()
-        for _ in range(num_layers):
+        for _ in range(layers_num):
             mlp = MLP([in_channels, hidden_channels, hidden_channels])
             self.convs.append(GINConv(nn=mlp, train_eps=False))
             in_channels = hidden_channels
