@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
         for data_name, data_content in dataset_data.items():
 
-            for layer_num in range(1, 8, 2):
+            for layer_num in range(3, 10, 2):
                 path = osp.join(osp.dirname(osp.realpath(__file__)), '.', 'data', data_name)
                 dataset = data_content.shuffle()
                 data = dataset[0]
