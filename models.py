@@ -97,4 +97,4 @@ class GAPP(torch.nn.Module):
 # Linear: GCN, Sage, GIN, GAT?
 # Poly: ChebNet, SGC, HCG?, GCN2?
 # Rat: ARMA, GAPP
-__all__ = ['GCN', 'Sage', 'ChebNet', 'SGC', 'ARMA', 'GAPP']
+__all__ = ['GCN', 'GIN', 'ChebNet', 'SGC', 'ARMA', 'GAPP']
