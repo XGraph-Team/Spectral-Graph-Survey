@@ -1,7 +1,7 @@
 import torch
 from torch.nn import Linear
 from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, \
-    global_add_pool, GATConv, GraphConv, APPNP
+    global_add_pool, GATConv, GraphConv, APPNP, Sequential
 import torch.nn.functional as F
 
 
@@ -20,10 +20,10 @@ class GCN(torch.nn.Module):
 
 
 class GIN(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=2):
+    def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
 
-        self.conv = GINConv(nn=MLP([in_channels, out_channels], dropout=0.5), train_eps=False)
+        self.conv = GINConv(nn=Sequential(Linear(in_channels, hidden_channels), Linear(hidden_channels, out_channels)))
 
     def forward(self, x, edge_index, batch=None):
         x = self.conv(x, edge_index).relu()
