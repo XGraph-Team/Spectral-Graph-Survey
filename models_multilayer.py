@@ -99,7 +99,7 @@ class ARMA(torch.nn.Module):
 
         self.convs = torch.nn.ModuleList()
         for _ in range(layer_num - 2):
-            self.convs.append(ARMAConv(hidden_channels, hidden_channels, num_stacks=3,
+            self.convs.append(ARMAConv(hidden_channels, hidden_channels, num_stacks=1,
                               num_layers=2, shared_weights=True, dropout=0.25))
 
         self.conv2 = ARMAConv(hidden_channels, out_channels,  num_stacks=3,
@@ -121,11 +121,21 @@ class ARMA(torch.nn.Module):
 
 
 class GAPP(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels):
+    def __init__(self, in_channels, hidden_channels, out_channels, layer_num):
         super().__init__()
-        self.lin1 = Linear(in_channels, out_channels)
-        # self.lin2 = Linear(hidden_channels, out_channels)
+        # self.lin1 = Linear(in_channels, hidden_channels)
+        # self.prop1 = APPNP(5, 0.1)
+
+        self.lin1 = Linear(in_channels, hidden_channels)
         self.prop1 = APPNP(5, 0.1)
+
+        self.convs = torch.nn.ModuleList()
+        for _ in range(layer_num - 2):
+            self.convs.append(Linear(hidden_channels, hidden_channels))
+            self.convs.append(APPNP(5, 0.1))
+
+        self.lin2 = Linear(hidden_channels, out_channels)
+        self.prop2 = APPNP(5, 0.1)
 
     def reset_parameters(self):
         self.lin1.reset_parameters()
@@ -134,8 +144,7 @@ class GAPP(torch.nn.Module):
     def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.5, training=self.training)
         x = F.relu(self.lin1(x))
-        # x = F.dropout(x, p=0.5, training=self.training)
-        # x = self.lin2(x)
+
         x = self.prop1(x, edge_index)
         return F.log_softmax(x, dim=1)
 
@@ -144,4 +153,4 @@ class GAPP(torch.nn.Module):
 # Linear: GCN, Sage, GIN, GAT?
 # Poly: ChebNet, SGC, HCG?, GCN2?
 # Rat: ARMA, GAPP
-__all__ = ['GCN', 'ARMA']
+__all__ = ['GCN', 'GAPP']
