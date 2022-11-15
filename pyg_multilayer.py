@@ -117,4 +117,4 @@ if __name__ == '__main__':
 
                 except Exception as e:
                     print('error')
-                log(Data=data_name, Test=final_test_acc)
+                log(Data=data_name, Layer_N=layer_num, Test=final_test_acc)
