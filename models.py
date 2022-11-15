@@ -87,7 +87,7 @@ class GAPP(torch.nn.Module):
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin2(x)
         x = self.prop1(x, edge_index)
-        return F.log_softmax(x, dim=1)
+        return x
 
 
 # complete
