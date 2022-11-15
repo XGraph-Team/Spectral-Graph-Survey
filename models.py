@@ -19,20 +19,16 @@ class GCN(torch.nn.Module):
         return x
 
 
-class Sage(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels):
+class GIN(torch.nn.Module):
+    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=2):
         super().__init__()
-        self.conv1 = SAGEConv(in_channels, hidden_channels, normalize=True)
-        self.conv2 = SAGEConv(hidden_channels, out_channels, normalize=True)
 
-    def forward(self, x, edge_index, edge_weight=None):
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.conv1(x, edge_index, edge_weight).relu()
-        x = F.dropout(x, p=0.5, training=self.training)
-        x = self.conv2(x, edge_index, edge_weight)
-        return x
+        self.conv = GINConv(nn=MLP([in_channels, hidden_channels, out_channels], dropout=0.5), train_eps=False)
 
-
+    def forward(self, x, edge_index, batch=None):
+        x = conv(x, edge_index).relu()
+        # x = global_add_pool(x, batch)
+        return self.mlp(x)
 
 
 
