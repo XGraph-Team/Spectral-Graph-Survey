@@ -54,7 +54,7 @@ class GIN(torch.nn.Module):
 
 
 class ChebNet(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, K=3):
+    def __init__(self, in_channels, hidden_channels, out_channels, K=5):
         super().__init__()
         self.conv1 = ChebConv(in_channels, hidden_channels, K)
         self.conv2 = ChebConv(hidden_channels, out_channels, K)
@@ -82,8 +82,8 @@ class SGC(torch.nn.Module):
 class ARMA(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
-        self.conv1 = ARMAConv(in_channels, hidden_channels)
-        self.conv2 = ARMAConv(hidden_channels, out_channels)
+        self.conv1 = ARMAConv(in_channels, hidden_channels, num_layers=5)
+        self.conv2 = ARMAConv(hidden_channels, out_channels, num_layers=5)
 
     def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.5, training=self.training)
