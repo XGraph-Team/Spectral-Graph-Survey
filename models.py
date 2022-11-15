@@ -59,7 +59,6 @@ class SGC(torch.nn.Module):
         return F.log_softmax(x, dim=1)
 
 
-
 class ARMA(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
@@ -79,7 +78,7 @@ class GAPP(torch.nn.Module):
         super().__init__()
         self.lin1 = Linear(in_channels, hidden_channels)
         self.lin2 = Linear(hidden_channels, out_channels)
-        self.prop1 = APPNP(K=5, alpha=0.5,dropout=0.5, add_self_loops=True, normalize=True)
+        self.prop1 = APPNP(K=5, alpha=0.5, dropout=0.5, add_self_loops=True, normalize=True)
 
     def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.5, training=self.training)
@@ -95,5 +94,5 @@ class GAPP(torch.nn.Module):
 # Poly: ChebNet, SGC, HCG?, GCN2?
 # Rat: ARMA, GAPP
 
-# 'GCN', 'Sage', 'ChebNet', 'SGC', 'ARMA',
-__all__ = ['GAPP']
+#
+__all__ = ['GCN', 'Sage', 'ChebNet', 'SGC', 'ARMA', 'GAPP']
