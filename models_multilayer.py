@@ -94,13 +94,16 @@ class ARMA(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, layer_num):
         super().__init__()
 
-        self.conv1 = ARMAConv(in_channels, hidden_channels)
+        self.conv1 = ARMAConv(in_channels, hidden_channels,  num_stacks=3,
+                              num_layers=2, shared_weights=True, dropout=0.25)
 
         self.convs = torch.nn.ModuleList()
         for _ in range(layer_num - 2):
-            self.convs.append(ARMAConv(hidden_channels, hidden_channels))
+            self.convs.append(ARMAConv(hidden_channels, hidden_channels, num_stacks=3,
+                              num_layers=2, shared_weights=True, dropout=0.25))
 
-        self.conv2 = ARMAConv(hidden_channels, out_channels)
+        self.conv2 = ARMAConv(hidden_channels, out_channels,  num_stacks=3,
+                              num_layers=2, shared_weights=True, dropout=0.25, act=lambda x: x)
 
     def forward(self, x, edge_index, edge_weight=None):
 
