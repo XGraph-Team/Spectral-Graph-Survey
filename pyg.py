@@ -1,7 +1,7 @@
 import argparse
 import os.path as osp
 import time
-
+import numpy as np
 import torch
 import torch.nn.functional as F
 from torch_geometric.datasets import Planetoid, Coauthor, Amazon, WikipediaNetwork, Actor, WebKB
@@ -103,22 +103,26 @@ if __name__ == '__main__':
                 return accs
 
 
-            best_val_acc = final_test_acc = 0
-            running_time = 0
+            # best_val_acc = final_test_acc = 0
+            # running_time = 0
+
+            acc_list = []
+            runtime_list = []
             try:
                 start = time.time()
-
                 for epoch in range(1, args.epochs + 1):
 
                     loss = train()
-                    train_acc, val_acc, tmp_test_acc = test()
-                    if val_acc > best_val_acc:
-                        best_val_acc = val_acc
-                        final_test_acc = tmp_test_acc
+                    _, _, test_acc = test()
+                    acc_list.append(test_acc)
+
+                    # if val_acc > best_val_acc:
+                    #     best_val_acc = val_acc
+                    #     final_test_acc = tmp_test_acc
                     # if epoch % 10 == 0:
                     #     log(Data=data_name, Epoch=epoch, Loss=loss, Train=train_acc, Val=val_acc, Test=test_acc)
                 end = time.time()
-                running_time = end - start
+                runtime_list.append(end - start)
             except Exception as e:
                 print('error')
-            log(Data=data_name, Test=final_test_acc, Runtime=running_time)
+            log(Data=data_name, Test=np.mean(acc_list), Runtime=np.mean(runtime_list))
