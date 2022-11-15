@@ -23,7 +23,7 @@ class GIN(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, num_layers=2):
         super().__init__()
 
-        self.conv = GINConv(nn=MLP([in_channels, hidden_channels, out_channels], dropout=0.5), train_eps=False)
+        self.conv = GINConv(nn=MLP([in_channels, out_channels], dropout=0.5), train_eps=False)
 
     def forward(self, x, edge_index, batch=None):
         x = self.conv(x, edge_index).relu()
