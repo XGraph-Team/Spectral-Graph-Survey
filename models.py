@@ -26,7 +26,7 @@ class GIN(torch.nn.Module):
         self.conv = GINConv(nn=MLP([in_channels, hidden_channels, out_channels], dropout=0.5), train_eps=False)
 
     def forward(self, x, edge_index, batch=None):
-        x = conv(x, edge_index).relu()
+        x = self.conv(x, edge_index).relu()
         # x = global_add_pool(x, batch)
         return self.mlp(x)
 
