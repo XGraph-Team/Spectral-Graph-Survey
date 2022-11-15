@@ -33,24 +33,7 @@ class Sage(torch.nn.Module):
         return x
 
 
-class GIN(torch.nn.Module):
-    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=2):
-        super().__init__()
 
-        self.convs = torch.nn.ModuleList()
-        for _ in range(num_layers):
-            mlp = MLP([in_channels, hidden_channels, hidden_channels])
-            self.convs.append(GINConv(nn=mlp, train_eps=False))
-            in_channels = hidden_channels
-
-        self.mlp = MLP([hidden_channels, hidden_channels, out_channels],
-                       norm=None, dropout=0.5)
-
-    def forward(self, x, edge_index, batch=None):
-        for conv in self.convs:
-            x = conv(x, edge_index).relu()
-        # x = global_add_pool(x, batch)
-        return self.mlp(x)
 
 
 class ChebNet(torch.nn.Module):
@@ -70,13 +53,14 @@ class ChebNet(torch.nn.Module):
 class SGC(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
-        self.conv1 = SGConv(in_channels, out_channels, K=2,
+        self.conv1 = SGConv(in_channels, out_channels, K=5,
                             cached=True)
 
     def forward(self, x, edge_index, edge_weight=None):
         x, edge_index = x, edge_index
         x = self.conv1(x, edge_index)
         return F.log_softmax(x, dim=1)
+
 
 
 class ARMA(torch.nn.Module):
@@ -93,28 +77,28 @@ class ARMA(torch.nn.Module):
         return x
 
 
-# class GAPP(torch.nn.Module):
-#     def __init__(self, in_channels, hidden_channels, out_channels):
-#         super().__init__()
-#         self.lin1 = Linear(in_channels, hidden_channels)
-#         self.lin2 = Linear(hidden_channels, out_channels)
-#         self.prop1 = APPNP(5, 0.1)
-#
-#     def reset_parameters(self):
-#         self.lin1.reset_parameters()
-#         self.lin2.reset_parameters()
-#
-#     def forward(self, x, edge_index, edge_weight=None):
-#         x = F.dropout(x, p=0.5, training=self.training)
-#         x = F.relu(self.lin1(x))
-#         x = F.dropout(x, p=0.5, training=self.training)
-#         x = self.lin2(x)
-#         x = self.prop1(x, edge_index)
-#         return F.log_softmax(x, dim=1)
+class GAPP(torch.nn.Module):
+    def __init__(self, in_channels, hidden_channels, out_channels):
+        super().__init__()
+        self.lin1 = Linear(in_channels, hidden_channels)
+        self.lin2 = Linear(hidden_channels, out_channels)
+        self.prop1 = APPNP(5, 0.1)
+
+    def reset_parameters(self):
+        self.lin1.reset_parameters()
+        self.lin2.reset_parameters()
+
+    def forward(self, x, edge_index, edge_weight=None):
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = F.relu(self.lin1(x))
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.lin2(x)
+        x = self.prop1(x, edge_index)
+        return F.log_softmax(x, dim=1)
 
 
 # complete
 # Linear: GCN, Sage, GIN, GAT?
 # Poly: ChebNet, SGC, HCG?, GCN2?
 # Rat: ARMA, GAPP
-__all__ = ['GCN', 'ChebNet', 'ARMA']
+__all__ = ['GCN', 'Sage', 'ChebNet', 'SGC', 'ARMA', 'GAPP']

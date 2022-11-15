@@ -14,6 +14,24 @@ class HCG(torch.nn.Module):
         # x = self.conv2(x, edge_index, edge_weight)
         return x
 
+class GIN(torch.nn.Module):
+    def __init__(self, in_channels, hidden_channels, out_channels, num_layers=2):
+        super().__init__()
+
+        self.convs = torch.nn.ModuleList()
+        for _ in range(num_layers):
+            mlp = MLP([in_channels, hidden_channels, hidden_channels])
+            self.convs.append(GINConv(nn=mlp, train_eps=False))
+            in_channels = hidden_channels
+
+        self.mlp = MLP([hidden_channels, hidden_channels, out_channels],
+                       norm=None, dropout=0.5)
+
+    def forward(self, x, edge_index, batch=None):
+        for conv in self.convs:
+            x = conv(x, edge_index).relu()
+        # x = global_add_pool(x, batch)
+        return self.mlp(x)
 
 
 class GAT(torch.nn.Module):
