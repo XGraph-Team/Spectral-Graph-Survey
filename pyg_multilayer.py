@@ -42,7 +42,7 @@ if __name__ == '__main__':
         'Wisconsin': WebKB(root='/tmp/Texas', name='Wisconsin')
     }
 
-    gnn_classes = [cls for cls in map(models.__dict__.get, models.__all__)]
+    gnn_classes = [cls for cls in map(models_multilayer.__dict__.get, models_multilayer.__all__)]
 
     for g in gnn_classes:
         print("==============")
