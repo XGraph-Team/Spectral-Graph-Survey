@@ -79,15 +79,11 @@ class GAPP(torch.nn.Module):
         super().__init__()
         self.lin1 = Linear(in_channels, hidden_channels)
         self.lin2 = Linear(hidden_channels, out_channels)
-        self.prop1 = APPNP(K=5, alpha=0.5, add_self_loops=True, normalize=True)
-
-    def reset_parameters(self):
-        self.lin1.reset_parameters()
-        self.lin2.reset_parameters()
+        self.prop1 = APPNP(K=5, alpha=0.5,dropout=0.5, add_self_loops=True, normalize=True)
 
     def forward(self, x, edge_index, edge_weight=None):
         x = F.dropout(x, p=0.5, training=self.training)
-        x = F.relu(self.lin1(x))
+        x = self.lin1(x).relu()
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.lin2(x)
         x = self.prop1(x, edge_index)
