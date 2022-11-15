@@ -1,7 +1,7 @@
 import torch
 from torch.nn import Linear
 from torch_geometric.nn import MLP, GCNConv, ChebConv, SAGEConv, GINConv, ARMAConv, GCN2Conv, SGConv, GATv2Conv, \
-    global_add_pool, GATConv, GraphConv, APPNP, Sequential
+    global_add_pool, GATConv, GraphConv, APPNP, Sequential, GINEConv
 import torch.nn.functional as F
 
 
@@ -19,17 +19,18 @@ class GCN(torch.nn.Module):
         return x
 
 
-class GIN(torch.nn.Module):
+class Sage(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels):
         super().__init__()
+        self.conv1 = SAGEConv(in_channels, hidden_channels)
+        self.conv2 = SAGEConv(hidden_channels, out_channels)
 
-        self.conv = GINConv(nn=Sequential(Linear(in_channels, hidden_channels), Linear(hidden_channels, out_channels)))
-
-    def forward(self, x, edge_index, batch=None):
-        x = self.conv(x, edge_index).relu()
-        # x = global_add_pool(x, batch)
-        return self.mlp(x)
-
+    def forward(self, x, edge_index, edge_weight=None):
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.conv1(x, edge_index, edge_weight).relu()
+        x = F.dropout(x, p=0.5, training=self.training)
+        x = self.conv2(x, edge_index, edge_weight)
+        return x
 
 
 class ChebNet(torch.nn.Module):
@@ -97,4 +98,4 @@ class GAPP(torch.nn.Module):
 # Linear: GCN, Sage, GIN, GAT?
 # Poly: ChebNet, SGC, HCG?, GCN2?
 # Rat: ARMA, GAPP
-__all__ = ['GCN', 'GIN', 'ChebNet', 'SGC', 'ARMA', 'GAPP']
+__all__ = ['GCN', 'Sage', 'ChebNet', 'SGC', 'ARMA', 'GAPP']
