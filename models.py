@@ -79,7 +79,7 @@ class GAPP(torch.nn.Module):
         super().__init__()
         self.lin1 = Linear(in_channels, hidden_channels)
         self.lin2 = Linear(hidden_channels, out_channels)
-        self.prop1 = APPNP(5, 0.1)
+        self.prop1 = APPNP(K=5, alpha=0.5, add_self_loops=True, normalize=True)
 
     def reset_parameters(self):
         self.lin1.reset_parameters()
@@ -98,4 +98,6 @@ class GAPP(torch.nn.Module):
 # Linear: GCN, Sage, GIN, GAT?
 # Poly: ChebNet, SGC, HCG?, GCN2?
 # Rat: ARMA, GAPP
-__all__ = ['GCN', 'Sage', 'ChebNet', 'SGC', 'ARMA', 'GAPP']
+
+# 'GCN', 'Sage', 'ChebNet', 'SGC', 'ARMA',
+__all__ = ['GAPP']
