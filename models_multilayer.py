@@ -8,7 +8,7 @@ import torch.nn.functional as F
 class GCN(torch.nn.Module):
     def __init__(self, in_channels, hidden_channels, out_channels, layer_num):
         super().__init__()
-        self.conv1 = GCNConv(in_channels, out_channels)
+        self.conv1 = GCNConv(in_channels, hidden_channels)
 
         self.convs = torch.nn.ModuleList()
         for _ in range(layer_num - 2):
@@ -21,7 +21,8 @@ class GCN(torch.nn.Module):
         x = self.conv1(x, edge_index, edge_weight).relu()
 
         for conv in self.convs:
-            x = conv(x, edge_index).relu()
+            x = conv(x, edge_index, edge_weight).relu()
+            x = F.dropout(x, p=0.5, training=self.training)
 
         x = F.dropout(x, p=0.5, training=self.training)
         x = self.conv2(x, edge_index, edge_weight)
