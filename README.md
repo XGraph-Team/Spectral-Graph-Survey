@@ -5,15 +5,10 @@
 
 - [Survey Papers](#surveypapers)
 - [Spatial and Spectral Views](#ssviews)
+- [Twin Papers](#twinpaper)
 - [Application](#application)
-  - [Computer Vision](#cv)
-  - [Natural Language Processing](#nlp)
-  - [Internet](#web)
-  - [Recommender Systems](#rec)
-  - [Healthcare](#health)
-  - [Chemistry](#chemistry)
-  - [Physics](#physics)
-  - [Others](#others)
+- [Code](#code)
+- [Citation](#citation)
 
 
 <a name="surveypapers" />
@@ -27,10 +22,18 @@
   - arXiv preprint arXiv:2302.05631 (2023)
 - [**Transferability of spectral graph convolutional neural networks.**](https://jmlr.csail.mit.edu/papers/volume22/20-213/20-213.pdf)
   - Levie, Ron, Wei Huang, Lorenzo Bucci, Michael Bronstein, and Gitta Kutyniok.
-  - **The Journal of Machine Learning Research** 22, no. 1 (2021): 12462-12520.
+  - **The Journal of Machine Learning Research (JMLR)** 22, no. 1 (2021): 12462-12520.
+- [**Analyzing the expressive power of graph neural networks in a spectral perspective.**](https://arxiv.org/pdf/2012.06660.pdf)
+  - Balcilar, Muhammet, Renton Guillaume, Pierre Héroux, Benoit Gaüzère, Sébastien Adam, and Paul Honeine.   
+  - In Proceedings of the **International Conference on Learning Representations (ICLR)**. 2021.
+
 - [**Bridging the gap between spectral and spatial domains in graph neural networks.**](https://normandie-univ.hal.science/hal-02515637v1/file/DSGCN.pdf)
   - Balcilar, Muhammet, Guillaume Renton, Pierre Héroux, Benoit Gauzere, Sebastien Adam, Paul Honeine.
-  - arXiv preprint arXiv:2003.11702 (2020). 
+  - arXiv preprint arXiv:2003.11702 (2020).
+- [**Understanding spectral graph neural network.**](https://arxiv.org/pdf/2012.06660.pdf)
+  -  Chen, Xinye.
+  -  arXiv preprint arXiv:2012.06660 (2020).
+
 
 
 <a name="ssviews" />
@@ -46,16 +49,29 @@
 | 2019        | [SGCN](https://proceedings.mlr.press/v97/wu19e.html), [DeepGCN](https://openaccess.thecvf.com/content_ICCV_2019/html/Li_DeepGCNs_Can_GCNs_Go_As_Deep_As_CNNs_ICCV_2019_paper.html), [MixHop](http://proceedings.mlr.press/v97/abu-el-haija19a.html), [PPAP](https://arxiv.org/abs/1810.05997)                                                                                                                                                                                                                                                               | [ARMA](https://ieeexplore.ieee.org/abstract/document/9336270), [GDC](https://proceedings.neurips.cc/paper_files/paper/2019/hash/23c894276a2c5a16470e6a31f4618d73-Abstract.html), [EigenPool](https://dl.acm.org/doi/abs/10.1145/3292500.3330982), [GWNN](https://arxiv.org/abs/1904.07785), [Stable GCNN](https://dl.acm.org/doi/abs/10.1145/3292500.3330956)      |
 | 2020        | [SIGN](https://arxiv.org/abs/2004.11198), [Spline GNN](https://ojs.aaai.org/index.php/AAAI/article/view/6185), [UaGGP](https://ojs.aaai.org/index.php/AAAI/article/view/5934), [GraLSP](https://ojs.aaai.org/index.php/AAAI/article/view/5861), [GraphSAINT](https://arxiv.org/abs/1907.04931), [DropEdge](https://arxiv.org/abs/1907.10903), [BGNN](https://arxiv.org/abs/2002.03575), [ALaGNN](https://dl.acm.org/doi/abs/10.5555/3491440.3491621), [Continuous GNN](http://proceedings.mlr.press/v119/xhonneux20a.html), [GCNII](https://proceedings.mlr.press/v119/chen20v.html), [PPRGo](https://dl.acm.org/doi/abs/10.1145/3394486.3403296), [DAGNN](https://dl.acm.org/doi/abs/10.1145/3394486.3403076), [H2GCN](https://proceedings.neurips.cc/paper/2020/hash/58ae23d878a47004366189884c2f8440-Abstract.html) | [GraphZoom](https://arxiv.org/abs/1910.02370)                                                                                                                                                                                                                                  |
 | 2021        | [ADC](https://proceedings.neurips.cc/paper/2021/hash/c42af2fa7356818e0389593714f59b52-Abstract.html), [UGCN](https://proceedings.neurips.cc/paper_files/paper/2021/hash/5857d68cd9280bc98d079fa912fd6740-Abstract.html), [DGC](https://proceedings.neurips.cc/paper/2021/hash/2d95666e2649fcfc6e3af75e09f5adb9-Abstract.html), [E(n)GNN](https://proceedings.mlr.press/v139/satorras21a.html), [GRAND](http://proceedings.mlr.press/v139/chamberlain21a.html), [C\&S](https://arxiv.org/abs/2010.13993), [LGNN](https://arxiv.org/abs/2110.14322)                                                                                                                                                                                          | [Interpretable Spectral Filter](http://proceedings.mlr.press/v139/kenlay21a.html), [Expressive Spectral Perspective](https://openreview.net/forum?id=-qh0M9XWxnv), [S2GC](https://openreview.net/forum?id=CYO5T-YjWZV), [BernNet](https://proceedings.neurips.cc/paper_files/paper/2021/hash/76f1cfd7754a6e4fc3281bcccb3d0902-Abstract.html)                                                                                                                                                      |
-| 2022        | [GINR](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c44a04289beaf0a7d968a94066a1d696-Abstract-Conference.html), [Adaptive SGC](https://proceedings.neurips.cc/paper_files/paper/2022/hash/ae07d152c51ea2ddae65aa7192eb5ff7-Abstract-Conference.html), [PGGNN](https://proceedings.mlr.press/v162/huang22l.html), [DIMP](https://ojs.aaai.org/index.php/AAAI/article/view/20353)                                                                                                                                                                                                                                                                        | [AGWN](https://epubs.siam.org/doi/abs/10.1137/1.9781611977172.12), [ChebNetII](https://proceedings.neurips.cc/paper_files/paper/2022/hash/2f9b3ee2bcea04b327c09d7e3145bd1e-Abstract-Conference.html), [JacobiConv](https://proceedings.mlr.press/v162/wang22am.html), [SpecGNN](https://proceedings.mlr.press/v162/yang22n.html), [G2CN](https://proceedings.mlr.press/v162/li22h.html), [pGNN](https://proceedings.mlr.press/v162/fu22e.html), [ChebGibbsNet](https://openreview.net/forum?id=2a5Ru3JtNe0), [SpecFormer](https://arxiv.org/abs/2303.01028), [SIGN](https://arxiv.org/abs/2202.13013), [Spectral Density](https://dl.acm.org/doi/abs/10.1145/3488560.3498480)  |
+| 2022        | [GINR](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c44a04289beaf0a7d968a94066a1d696-Abstract-Conference.html), [Adaptive SGC](https://proceedings.neurips.cc/paper_files/paper/2022/hash/ae07d152c51ea2ddae65aa7192eb5ff7-Abstract-Conference.html), [PGGNN](https://proceedings.mlr.press/v162/huang22l.html), [DIMP](https://ojs.aaai.org/index.php/AAAI/article/view/20353)                                                                                                                                                                                                                                                                        | [AGWN](https://epubs.siam.org/doi/abs/10.1137/1.9781611977172.12), [ChebNetII](https://proceedings.neurips.cc/paper_files/paper/2022/hash/2f9b3ee2bcea04b327c09d7e3145bd1e-Abstract-Conference.html), [JacobiConv](https://proceedings.mlr.press/v162/wang22am.html), [SpecGNN](https://proceedings.mlr.press/v162/yang22n.html), [G2CN](https://proceedings.mlr.press/v162/li22h.html), [pGNN](https://proceedings.mlr.press/v162/fu22e.html), [ChebGibbsNet](https://openreview.net/forum?id=2a5Ru3JtNe0), [SpecFormer](https://arxiv.org/abs/2303.01028), [SIGN](https://arxiv.org/abs/2202.13013), [Spectral Density](https://dl.acm.org/doi/abs/10.1145/3488560.3498480), [EvenNet](https://proceedings.neurips.cc/paper_files/paper/2022/hash/1e62dae07279cb09d2e87378d10dacfc-Abstract-Conference.html)  |
 | 2023        | [RSGNN](https://dl.acm.org/doi/abs/10.1145/3543507.3583221), [CAGCN](https://dl.acm.org/doi/abs/10.1145/3543507.3583229), [Low Rank GNN](https://dl.acm.org/doi/abs/10.1145/3543507.3583419), [Auto-HeG](https://arxiv.org/abs/2302.12357), [DropMessage](https://ojs.aaai.org/index.php/AAAI/article/view/25545)                                                                                                                                                                                                                                        | [DSF](https://dl.acm.org/doi/abs/10.1145/3543507.3583324), [F-SEGA](https://dl.acm.org/doi/abs/10.1145/3543507.3583423), [MidGCN](https://dl.acm.org/doi/abs/10.1145/3543507.3583335), [GHRN](https://dl.acm.org/doi/abs/10.1145/3543507.3583268)                                                                                                                                                                                                                  |
 
+<a name="twinpaper" />
+
+# Twin Papers
+
+| Spatial Domain                                                                                                                                                                                                                                                                                                                                                                           | Spectral Domain                                                                                                                                                                                                                                                                                                        |
+|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [ParWalk](https://proceedings.neurips.cc/paper_files/paper/2012/hash/512c5cad6c37edb98ae91c8a76c3a291-Abstract.html), [DeepWalk](https://dl.acm.org/doi/abs/10.1145/2623330.2623732), [LINE](https://arxiv.org/abs/1503.03578)                                                                                                                                                                                                             | [Spectral GNN](https://arxiv.org/abs/1312.6203), [ISGNN](https://arxiv.org/abs/1506.05163), [Neural graph fingerprints](https://proceedings.neurips.cc/paper_files/paper/2015/hash/f9be311e65d81a9ad8150a60844bb94c-Abstract.html)                                                                              |
+                                                                                                                                                                                                            |
 
 <a name="application" />
 
 # Applications
 
+
+<a name="code" />
+
 # Experiment Code for Benchmarking Rational vs Polynomial
 
+
+<a name="citation" />
 
 # Citation Info
 ```
