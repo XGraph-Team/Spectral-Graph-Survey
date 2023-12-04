@@ -29,7 +29,7 @@
   - Levie, Ron, Wei Huang, Lorenzo Bucci, Michael Bronstein, and Gitta Kutyniok.
   - **The Journal of Machine Learning Research** 22, no. 1 (2021): 12462-12520.
 - [**Bridging the gap between spectral and spatial domains in graph neural networks.**](https://normandie-univ.hal.science/hal-02515637v1/file/DSGCN.pdf)
-  - Balcilar, Muhammet, Guillaume Renton, Pierre Héroux, Benoit Gauzere, Sebastien Adam, and Paul Honeine.
+  - Balcilar, Muhammet, Guillaume Renton, Pierre Héroux, Benoit Gauzere, Sebastien Adam, Paul Honeine.
   - arXiv preprint arXiv:2003.11702 (2020). 
 
 
