@@ -1,6 +1,23 @@
 # Awesome Spectral Graph Neural Networks
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) 
 
+## Contents
+
+- [Survey Papers](#surveypapers)
+- [Spatial and Spectral Views](#ssviews)
+- [Application](#application)
+  - [Computer Vision](#cv)
+  - [Natural Language Processing](#nlp)
+  - [Internet](#web)
+  - [Recommender Systems](#rec)
+  - [Healthcare](#health)
+  - [Chemistry](#chemistry)
+  - [Physics](#physics)
+  - [Others](#others)
+
+
+<a name="surveypapers" />
+
 # Surveys
 - [**Bridging the Gap between Spatial and Spectral Domains: A Unified Framework for Graph Neural Networks.**](https://dl.acm.org/doi/10.1145/3627816)
   - Zhiqian Chen, Fanglan Chen, Lei Zhang, Taoran Ji, Kaiqun Fu, Liang Zhao, Feng Chen, Lingfei Wu, Charu Aggarwal, Chang-Tien Lu.
@@ -16,6 +33,8 @@
   - arXiv preprint arXiv:2003.11702 (2020). 
 
 
+<a name="ssviews" />
+
 # GNNs in Spatial and Spectral Views 
 
 | Year        | Spatial Domain                                                                                                                                                                                                                                                                                                                                                                           | Spectral Domain                                                                                                                                                                                                                                                                                                        |
@@ -30,6 +49,10 @@
 | 2022        | [GINR](https://proceedings.neurips.cc/paper_files/paper/2022/hash/c44a04289beaf0a7d968a94066a1d696-Abstract-Conference.html), [Adaptive SGC](https://proceedings.neurips.cc/paper_files/paper/2022/hash/ae07d152c51ea2ddae65aa7192eb5ff7-Abstract-Conference.html), [PGGNN](https://proceedings.mlr.press/v162/huang22l.html), [DIMP](https://ojs.aaai.org/index.php/AAAI/article/view/20353)                                                                                                                                                                                                                                                                        | [AGWN](https://epubs.siam.org/doi/abs/10.1137/1.9781611977172.12), [ChebNetII](https://proceedings.neurips.cc/paper_files/paper/2022/hash/2f9b3ee2bcea04b327c09d7e3145bd1e-Abstract-Conference.html), [JacobiConv](https://proceedings.mlr.press/v162/wang22am.html), [SpecGNN](https://proceedings.mlr.press/v162/yang22n.html), [G2CN](https://proceedings.mlr.press/v162/li22h.html), [pGNN](https://proceedings.mlr.press/v162/fu22e.html), [ChebGibbsNet](https://openreview.net/forum?id=2a5Ru3JtNe0), [SpecFormer](https://arxiv.org/abs/2303.01028), [SIGN](https://arxiv.org/abs/2202.13013), [Spectral Density](https://dl.acm.org/doi/abs/10.1145/3488560.3498480)  |
 | 2023        | [RSGNN](https://dl.acm.org/doi/abs/10.1145/3543507.3583221), [CAGCN](https://dl.acm.org/doi/abs/10.1145/3543507.3583229), [Low Rank GNN](https://dl.acm.org/doi/abs/10.1145/3543507.3583419), [Auto-HeG](https://arxiv.org/abs/2302.12357), [DropMessage](https://ojs.aaai.org/index.php/AAAI/article/view/25545)                                                                                                                                                                                                                                        | [DSF](https://dl.acm.org/doi/abs/10.1145/3543507.3583324), [F-SEGA](https://dl.acm.org/doi/abs/10.1145/3543507.3583423), [MidGCN](https://dl.acm.org/doi/abs/10.1145/3543507.3583335), [GHRN](https://dl.acm.org/doi/abs/10.1145/3543507.3583268)                                                                                                                                                                                                                  |
 
+
+<a name="application" />
+
+# Applications
 
 # Experiment Code for Benchmarking Rational vs Polynomial
 
