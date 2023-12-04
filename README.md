@@ -68,7 +68,20 @@
 
 <a name="application" />
 
-# Applications
+# Applications with Spectral Graph
+- Huang, Weiyu, Leah Goldsberry, Nicholas F. Wymbs, Scott T. Grafton, Danielle S. Bassett, and Alejandro Ribeiro. "**Graph frequency analysis of brain signals.**" IEEE journal of selected topics in signal processing 10, no. 7 (2016): 1189-1203.
+- Parisot, Sarah, Sofia Ira Ktena, Enzo Ferrante, Matthew Lee, Ricardo Guerrerro Moreno, Ben Glocker, and Daniel Rueckert. "**Spectral graph convolutions for population-based disease prediction**." In Medical Image Computing and Computer Assisted Intervention− MICCAI 2017: 20th International Conference, Quebec City, QC, Canada, September 11-13, 2017, Proceedings, Part III 20, pp. 177-185. Springer International Publishing, 2017.
+- Parisot, Sarah, Sofia Ira Ktena, Enzo Ferrante, Matthew Lee, Ricardo Guerrero, Ben Glocker, and Daniel Rueckert. "**Disease prediction using graph convolutional networks: application to autism spectrum disorder and Alzheimer’s disease.**" Medical image analysis 48 (2018): 117-130.
+- Raj, Ashish, Chang Cai, Xihe Xie, Eva Palacios, Julia Owen, Pratik Mukherjee, and Srikantan Nagarajan. "**Spectral graph theory of brain oscillations.**" Human brain mapping 41, no. 11 (2020): 2980-2998.
+- Verma, Parul, Srikantan Nagarajan, and Ashish Raj. "**Spectral graph theory of brain oscillations—-Revisited and improved.**" NeuroImage 249 (2022): 118919.
+- Hu, Chenhui, Lin Cheng, Jorge Sepulcre, Keith A. Johnson, Georges E. Fakhri, Yue M. Lu, and Quanzheng Li. "**A spectral graph regression model for learning brain connectivity of Alzheimer’s disease.**" PloS one 10, no. 5 (2015): e0128136.
+- Verma, Parul, Srikantan Nagarajan, and Ashish Raj. "**Stability and dynamics of a spectral graph model of brain oscillations.**" Network Neuroscience 7, no. 1 (2023): 48-72.
+- Kunegis, Jérôme, and Andreas Lommatzsch. "**Learning spectral graph transformations for link prediction.**" In Proceedings of the 26th Annual International Conference on Machine Learning, pp. 561-568. 2009.
+- Retiére, Nicolas, Dinh Truc Ha, and Jean-Guy Caputo. "**Spectral graph analysis of the geometry of power flows in transmission networks.**" IEEE Systems Journal 14, no. 2 (2019): 2736-2747.
+- Perkins, Andy D., and Michael A. Langston. "**Threshold selection in gene co-expression networks using spectral graph theory techniques.**" In BMC bioinformatics, vol. 10, no. 11, pp. 1-11. BioMed Central, 2009.
+- Thorne, Thomas, and Michael PH Stumpf. "**Graph spectral analysis of protein interaction network evolution.**" Journal of The Royal Society Interface 9, no. 75 (2012): 2653-2666.
+- Bell, Michael GH, Fumitaka Kurauchi, Supun Perera, and Walter Wong. "**Investigating transport network vulnerability by capacity weighted spectral analysis.**" Transportation Research Part B: Methodological 99 (2017): 251-266.
+- Parisot, Sarah, Sofia Ira Ktena, Enzo Ferrante, Matthew Lee, Ricardo Guerrerro Moreno, Ben Glocker, and Daniel Rueckert. **"Spectral graph convolutions for population-based disease prediction**." In Medical Image Computing and Computer Assisted Intervention− MICCAI 2017: 20th International Conference, Quebec City, QC, Canada, September 11-13, 2017, Proceedings, Part III 20, pp. 177-185. Springer International Publishing, 2017.
 
 
 <a name="code" />
