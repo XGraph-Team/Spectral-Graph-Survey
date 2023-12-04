@@ -87,7 +87,7 @@
 <a name="code" />
 
 # Experiment Code for Benchmarking Rational vs Polynomial
-
+See `code` folder
 
 <a name="citation" />
 
