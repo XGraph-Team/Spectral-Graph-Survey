@@ -1,4 +1,22 @@
+# Awesome Spectral Graph Neural Networks
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) 
+
+# Surveys
+- [**Bridging the Gap between Spatial and Spectral Domains: A Unified Framework for Graph Neural Networks.**](https://dl.acm.org/doi/10.1145/3627816)
+  - Zhiqian Chen, Fanglan Chen, Lei Zhang, Taoran Ji, Kaiqun Fu, Liang Zhao, Feng Chen, Lingfei Wu, Charu Aggarwal, Chang-Tien Lu.
+  - **ACM Computer Surveys**, 2023
+- [**A Survey on Spectral Graph Neural Networks.**](https://arxiv.org/abs/2302.05631)
+  - Bo, Deyu, Xiao Wang, Yang Liu, Yuan Fang, Yawen Li, and Chuan Shi.
+  - arXiv preprint arXiv:2302.05631 (2023)
+- [**Transferability of spectral graph convolutional neural networks.**](https://jmlr.csail.mit.edu/papers/volume22/20-213/20-213.pdf)
+  - Levie, Ron, Wei Huang, Lorenzo Bucci, Michael Bronstein, and Gitta Kutyniok.
+  - **The Journal of Machine Learning Research** 22, no. 1 (2021): 12462-12520.
+- [**Bridging the gap between spectral and spatial domains in graph neural networks.**](https://normandie-univ.hal.science/hal-02515637v1/file/DSGCN.pdf)
+  - Balcilar, Muhammet, Guillaume Renton, Pierre Héroux, Benoit Gauzere, Sebastien Adam, and Paul Honeine.
+  - arXiv preprint arXiv:2003.11702 (2020). 
+
+
+# GNNs in Spatial and Spectral Views 
 
 | Year        | Spatial Domain                                                                                                                                                                                                                                                                                                                                                                           | Spectral Domain                                                                                                                                                                                                                                                                                                        |
 |-------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -19,7 +37,7 @@
 # Citation Info
 ```
 @article{chen2023bridging,
-  title        = {Bridging the Gap between Spatial and Spectral Domains: A Survey on Graph Neural Networks},
+  title        = {Bridging the Gap between Spatial and Spectral Domains: A Unified Framework for Graph Neural Networks},
   author       = {Chen, Zhiqian and Chen, Fanglan and Zhang, Lei and Ji, Taoran and Fu, Kaiqun and Zhao, Liang and Chen, Feng and Wu, Lingfei and Aggarwal, Charu and Lu, Chang-Tien},
   year         = 2023,
   journal      = {ACM Computing Surveys},
