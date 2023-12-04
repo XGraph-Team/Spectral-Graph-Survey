@@ -82,7 +82,7 @@
 - Thorne, Thomas, and Michael PH Stumpf. "**Graph spectral analysis of protein interaction network evolution.**" Journal of The Royal Society Interface 9, no. 75 (2012): 2653-2666.
 - Bell, Michael GH, Fumitaka Kurauchi, Supun Perera, and Walter Wong. "**Investigating transport network vulnerability by capacity weighted spectral analysis.**" Transportation Research Part B: Methodological 99 (2017): 251-266.
 - Parisot, Sarah, Sofia Ira Ktena, Enzo Ferrante, Matthew Lee, Ricardo Guerrerro Moreno, Ben Glocker, and Daniel Rueckert. **"Spectral graph convolutions for population-based disease prediction**." In Medical Image Computing and Computer Assisted Intervention− MICCAI 2017: 20th International Conference, Quebec City, QC, Canada, September 11-13, 2017, Proceedings, Part III 20, pp. 177-185. Springer International Publishing, 2017.
-
+- Wang, Yang, Deepayan Chakrabarti, Chenxi Wang, and Christos Faloutsos. "**Epidemic spreading in real networks: An eigenvalue viewpoint.**" In 22nd International Symposium on Reliable Distributed Systems, 2003. Proceedings., pp. 25-34. IEEE, 2003.
 
 <a name="code" />
 
