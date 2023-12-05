@@ -25,7 +25,7 @@
   - Levie, Ron, Wei Huang, Lorenzo Bucci, Michael Bronstein, and Gitta Kutyniok.
   - The Journal of Machine Learning Research **(JMLR)** 22, no. 1 (2021): 12462-12520.
 - [**Geometric deep learning: going beyond euclidean data.**](https://ieeexplore.ieee.org/abstract/document/7974879?casa_token=Iv5s9xtE6MUAAAAA:hR_rGY3paXXYxbGK_Zg5TMAwIVildEIcnZ9FOrJwtO3Psm3v9k13sU-bvEDzxN1SH_3BuD7S)
-  - Bronstein, Michael M., Joan Bruna, Yann LeCun, Arthur Szlam, and Pierre Vandergheynst. "
+  - Bronstein, Michael M., Joan Bruna, Yann LeCun, Arthur Szlam, and Pierre Vandergheynst. 
   - IEEE Signal Processing Magazine **(SPM)** 34, no. 4 (2017): 18-42.
 - [**Spectral Graph Convolutional Neural Networks in the Context of Regularization Theory.**](https://ieeexplore.ieee.org/abstract/document/9794480)
   - A. Salim and S. Sumitra 
