@@ -43,7 +43,7 @@
 
 <a name="milestone" />
 
-# Milestone Paper in Building Spectral Graph Convolution
+# Milestone Papers in Building Spectral Graph Convolution
 - [Wavelets on graphs via spectral graph theory](https://www.sciencedirect.com/science/article/pii/S1063520310000552)
 - [Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering](https://proceedings.neurips.cc/paper_files/paper/2016/hash/04df4d434d481c5bb723be1b6df1ee65-Abstract.html)
 - [The emerging field of signal processing on graphs: Extending high-dimensional data analysis to networks and other irregular domains](https://ieeexplore.ieee.org/abstract/document/6494675?casa_token=y16k8pzsD00AAAAA:okAjDWZ6nQr4s-rynKsUtem5Tmdb2txXmhL_NAC2p1ggJDCtUFdE0MlKt_9FfVW7t6cjMo5o)
