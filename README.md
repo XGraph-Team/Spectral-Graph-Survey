@@ -4,10 +4,10 @@
 ## Contents
 
 - [Survey Papers](#surveypapers)
-- [Milestone Paper](#milestone)
+- [Milestone Papers](#milestone)
 - [Spatial and Spectral Views](#ssviews)
 - [Twin Papers](#twinpaper)
-- [Application](#application)
+- [Applications](#application)
 - [Code](#code)
 - [Citation](#citation)
 
