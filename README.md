@@ -1,7 +1,7 @@
 # Awesome Spectral Graph Neural Networks
 ![PRs Welcome](https://img.shields.io/badge/PRs-Welcome-green) [![Awesome](https://awesome.re/badge.svg)](https://awesome.re) 
 
-## Contents
+# Contents
 
 - [Survey Papers](#surveypapers)
 - [Milestone Papers](#milestone)
