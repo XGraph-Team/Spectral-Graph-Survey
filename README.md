@@ -138,13 +138,22 @@ See `code` folder
 
 # Citation Info
 ```
-@article{chen2023bridging,
-  title        = {Bridging the Gap between Spatial and Spectral Domains: A Unified Framework for Graph Neural Networks},
-  author       = {Chen, Zhiqian and Chen, Fanglan and Zhang, Lei and Ji, Taoran and Fu, Kaiqun and Zhao, Liang and Chen, Feng and Wu, Lingfei and Aggarwal, Charu and Lu, Chang-Tien},
-  year         = 2023,
-  journal      = {ACM Computing Surveys},
-  doi          = {10.1145/3627816},
-  url          = {https://dl.acm.org/doi/10.1145/3627816},
-  publisher    = {Association for Computing Machinery (ACM)}
+@article{10.1145/3627816,
+    author = {Chen, Zhiqian and Chen, Fanglan and Zhang, Lei and Ji, Taoran and Fu, Kaiqun and Zhao, Liang and Chen, Feng and Wu, Lingfei and Aggarwal, Charu and Lu, Chang-Tien},
+    title = {Bridging the Gap between Spatial and Spectral Domains: A Unified Framework for Graph Neural Networks},
+    year = {2023},
+    issue_date = {May 2024},
+    publisher = {Association for Computing Machinery},
+    address = {New York, NY, USA},
+    volume = {56},
+    number = {5},
+    issn = {0360-0300},
+    url = {https://doi.org/10.1145/3627816},
+    doi = {10.1145/3627816},
+    journal = {ACM Comput. Surv.},
+    month = {dec},
+    articleno = {126},
+    numpages = {42},
+    keywords = {approximation theory, spectral graph theory, Deep learning, graph neural networks, graph learning}
 }
 ```
