@@ -17,7 +17,7 @@
 # Surveys
 - [**Bridging the Gap between Spatial and Spectral Domains: A Unified Framework for Graph Neural Networks.**](https://dl.acm.org/doi/10.1145/3627816)
   - Zhiqian Chen, Fanglan Chen, Lei Zhang, Taoran Ji, Kaiqun Fu, Liang Zhao, Feng Chen, Lingfei Wu, Charu Aggarwal, Chang-Tien Lu.
-  - **ACM Computer Surveys**, 2023
+  - ACM Computer Surveys **(CSUR)**, 2023
 - [**A Survey on Spectral Graph Neural Networks.**](https://arxiv.org/abs/2302.05631)
   - Bo, Deyu, Xiao Wang, Yang Liu, Yuan Fang, Yawen Li, and Chuan Shi.
   - arXiv preprint arXiv:2302.05631 (2023)
