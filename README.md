@@ -30,9 +30,6 @@
 - [**Spectral Graph Convolutional Neural Networks in the Context of Regularization Theory.**](https://ieeexplore.ieee.org/abstract/document/9794480)
   - A. Salim and S. Sumitra 
   - IEEE Transactions on Neural Networks and Learning Systems **(TNNLS)**, 2022
-- [**Analyzing the expressive power of graph neural networks in a spectral perspective.**](https://arxiv.org/pdf/2012.06660.pdf)
-  - Balcilar, Muhammet, Renton Guillaume, Pierre Héroux, Benoit Gaüzère, Sébastien Adam, and Paul Honeine.   
-  - Proceedings of the International Conference on Learning Representations **(ICLR)**. 2021.
 - [**Bridging the gap between spectral and spatial domains in graph neural networks.**](https://normandie-univ.hal.science/hal-02515637v1/file/DSGCN.pdf)
   - Balcilar, Muhammet, Guillaume Renton, Pierre Héroux, Benoit Gauzere, Sebastien Adam, Paul Honeine.
   - arXiv preprint arXiv:2003.11702 (2020).
